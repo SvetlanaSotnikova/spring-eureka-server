@@ -1,0 +1,25 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: Microservice1
+          uri:
+            http://localhost:8081
+          predicates:
+            - Path=/serviceA/**
+        - id: Microservice2
+          uri:
+            http://localhost:8082
+          predicates:
+            - Path=/serviceB/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8181/eureka
